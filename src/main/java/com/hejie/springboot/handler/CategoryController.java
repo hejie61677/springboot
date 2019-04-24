@@ -26,7 +26,7 @@ import java.util.List;
 public class CategoryController {
 
     //JPA方式
-    @Autowired CategoryDAO categoryDAO;
+    @Autowired private CategoryDAO categoryDAO;
 
     /**
       * @Description:
@@ -76,7 +76,7 @@ public class CategoryController {
     }
     
     //mybatis方式
-    @Autowired CategoryMapper categoryMapper;
+    @Autowired private CategoryMapper categoryMapper;
 
     /**
       * @Description:
