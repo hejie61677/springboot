@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /**
   * @program: springboot
-  * @description: 
+  * @description: category_test实体类
   * @author: hejie
   * @create: 2019/4/18
   */

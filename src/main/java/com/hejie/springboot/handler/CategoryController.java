@@ -1,5 +1,7 @@
 package com.hejie.springboot.handler;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hejie.springboot.dao.CategoryDAO;
 import com.hejie.springboot.mapper.CategoryMapper;
 import com.hejie.springboot.pojo.Category;
@@ -18,7 +20,7 @@ import java.util.List;
 
 /**
   * @program: springboot
-  * @description:
+  * @description: Category处理器类
   * @author: hejie
   * @create: 2019/4/18
   */
@@ -29,14 +31,14 @@ public class CategoryController {
     @Autowired private CategoryDAO categoryDAO;
 
     /**
-      * @Description:
-      * @Param: Model
+      * @Description: 列表查询
+      * @Param: Model, int, int
       * @return: String
       * @Author: hejie
       * @date: 2019/4/18
       */
     @RequestMapping("/categoryList1")
-    public String categoryList1(Model model, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "5") int size) {
+    public String categoryList1(Model model, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "3") int size) {
 
         start = start < 0 ? 0 : start;
         Sort sort = new Sort(Sort.Direction.ASC, "id");
@@ -46,30 +48,58 @@ public class CategoryController {
         return "categoryList1";
     }
 
+    /**
+     * @Description: 增加
+     * @Param: CategoryEntity
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
     @RequestMapping("/addCategory1")
-    public String addCategory(CategoryEntity categoryEntity){
+    public String addCategory1(CategoryEntity categoryEntity) {
 
         categoryDAO.save(categoryEntity);
         return "redirect:categoryList1";
     }
 
+    /**
+     * @Description: 删除
+     * @Param: CategoryEntity
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
     @RequestMapping("/deleteCategory1")
-    public String deleteCategory(CategoryEntity categoryEntity){
+    public String deleteCategory1(CategoryEntity categoryEntity) {
 
         categoryDAO.delete(categoryEntity);
         return "redirect:categoryList1";
     }
 
+    /**
+     * @Description: 修改前查询
+     * @Param: int, Model
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
     @RequestMapping("/editCategory1")
-    public String editCategory(int id, Model model){
+    public String editCategory1(int id, Model model) {
 
         CategoryEntity categoryEntity = categoryDAO.getOne(id);
         model.addAttribute("category", categoryEntity);
         return "editCategory1";
     }
 
+    /**
+     * @Description: 修改
+     * @Param: CategoryEntity
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
     @RequestMapping("/updateCategory1")
-    public String updateCategory(CategoryEntity categoryEntity){
+    public String updateCategory1(CategoryEntity categoryEntity) {
 
         categoryDAO.save(categoryEntity);
         return "redirect:categoryList1";
@@ -79,18 +109,77 @@ public class CategoryController {
     @Autowired private CategoryMapper categoryMapper;
 
     /**
-      * @Description:
-      * @Param: Moder
+      * @Description: 列表查询
+      * @Param: Model, int, int
       * @return: String
       * @Author: hejie
-      * @date: 2019/4/18
+      * @date: 2019/4/20
       */
     @RequestMapping("/categoryList2")
-    public String categoryList2(Model model) {
+    public String categoryList2(Model model, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "3") int size) {
 
+        PageHelper.startPage(start, size, "id desc");
         List<Category> list = categoryMapper.findAll();
-        model.addAttribute("list", list);
+        PageInfo<Category> pageInfo = new PageInfo<>(list);
+        model.addAttribute("pageInfo", pageInfo);
         return "categoryList2";
+    }
+
+    /**
+     * @Description: 新增
+     * @Param: Category
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/20
+     */
+    @RequestMapping("/addCategory2")
+    public String addCategory2(Category category) {
+
+        categoryMapper.save(category);
+        return "redirect:categoryList2";
+    }
+
+    /**
+     * @Description: 删除
+     * @Param: Category
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/20
+     */
+    @RequestMapping("/deleteCategory2")
+    public String deleteCategory2(Category category) {
+
+        categoryMapper.delete(category.getId());
+        return "redirect:categoryList2";
+    }
+
+    /**
+     * @Description: 修改前查询
+     * @Param: int, Model
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/20
+     */
+    @RequestMapping("/editCategory2")
+    public String listCategory(int id, Model model) {
+
+        Category category = categoryMapper.get(id);
+        model.addAttribute("category", category);
+        return "editCategory2";
+    }
+
+    /**
+     * @Description: 修改
+     * @Param: Category
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/20
+     */
+    @RequestMapping("/updateCategory2")
+    public String updateCategory(Category category) {
+
+        categoryMapper.update(category);
+        return "redirect:categoryList2";
     }
 
 }

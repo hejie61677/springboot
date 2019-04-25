@@ -2,7 +2,7 @@ package com.hejie.springboot.pojo;
 
 /**
   * @program: springboot
-  * @description: 
+  * @description: javabean
   * @author: hejie
   * @create: 2019/4/18
   */

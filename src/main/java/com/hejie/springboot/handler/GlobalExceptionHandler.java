@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
   * @program: springboot
-  * @description:
+  * @description: 异常捕获处理器类
   * @author: hejie
   * @create: 2019/4/18
   */
@@ -23,11 +23,11 @@ public class GlobalExceptionHandler {
       * @date: 2019/4/18
       */
     @ExceptionHandler(value = Exception.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) {
+    public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) {
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
-        mav.addObject("url", req.getRequestURL());
+        mav.addObject("url", request.getRequestURL());
         mav.setViewName("error");
         return mav;
 

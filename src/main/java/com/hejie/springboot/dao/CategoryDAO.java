@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
   * @program: springboot
-  * @description:
+  * @description: 继承JpaRepository接口的简单持久层接口
   * @author: hejie
   * @create: 2019/4/18
   */
