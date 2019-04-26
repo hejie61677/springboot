@@ -25,11 +25,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) {
 
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
-        mav.addObject("url", request.getRequestURL());
-        mav.setViewName("error");
-        return mav;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("exception", e);
+        modelAndView.addObject("url", request.getRequestURL());
+        modelAndView.setViewName("errorPage");
+        return modelAndView;
 
     }
 

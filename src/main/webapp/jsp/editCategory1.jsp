@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/static/ico/favicon.ico">
 </head>
 <body>
 <div style="margin:auto; width:500px">

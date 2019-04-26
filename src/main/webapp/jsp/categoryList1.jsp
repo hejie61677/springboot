@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>CategoryList</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/static/ico/favicon.ico">
 </head>
 <body>
 <div align="center">
