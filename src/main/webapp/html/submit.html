@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>用AJAX以JSON方式提交数据</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <link rel="icon" href="../static/ico/favicon.ico">
+</head>
+<body>
+    <form>
+        <label>
+            id：<input type="text" id="id" value="1" /><br/>
+            name：<input type="text" id="name" value="phone xxx"/><br/>
+            price：<input type="text" id="price" value="8888"/><br/>
+        </label>
+        <input type="button" value="提交" id="sender">
+    </form>
+    <div id="messageDiv"></div>
+</body>
+<script>
+    $("#sender").click(function(){
+        var id = document.getElementById("id").value;
+        var name = document.getElementById("name").value;
+        var price = document.getElementById("price").value;
+        var phone = {"name" : name, "id" : id, "price" : price};
+        var jsonData = JSON.stringify(phone);
+        var url ="../phoneJson";
+
+        $.ajax({
+            type:"put",
+            url: url,
+            data:jsonData,
+            dataType:"json",
+            contentType : "application/json;charset=UTF-8",
+            success: function(result){
+            }
+        });
+        console.log(jsonData);
+        alert("提交成功，请在springboot控制台查看服务端接收到的数据");
+    });
+</script>
+</html>

@@ -1,16 +1,19 @@
 package com.hejie.springboot.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 /**
   * @program: springboot
-  * @description: category_test实体类
+  * @description: phone_test实体类
   * @author: hejie
-  * @create: 2019/4/18
+  * @create: 2019/5/6
   */
 @Entity
-@Table(name = "category_test")
-public class CategoryEntity {
+@Table(name = "phone_test")
+@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+public class PhoneEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +22,9 @@ public class CategoryEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "price")
+    private int price;
 
     public int getId() {
         return id;
@@ -36,8 +42,16 @@ public class CategoryEntity {
         this.name = name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "Category [id = " + id + ", name = " + name + "]";
+        return "Category [id = " + id + ", name = " + name + ", price = " + price + "]";
     }
 }

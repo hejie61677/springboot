@@ -13,8 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,12 +30,87 @@ public class CategoryController {
     @Autowired private CategoryDAO categoryDAO;
 
     /**
-      * @Description: 列表查询
+      * @Description: 列表查询 restful风格
       * @Param: Model, int, int
       * @return: String
       * @Author: hejie
       * @date: 2019/4/18
       */
+    @GetMapping("/category")
+    public String categoryList(Model model, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "3") int size) {
+
+        start = start < 0 ? 0 : start;
+        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Pageable pageable = new PageRequest(start, size, sort);
+        Page<CategoryEntity> page = categoryDAO.findAll(pageable);
+        model.addAttribute("page", page);
+        return "categoryList";
+    }
+
+    /**
+     * @Description: 增加  restful风格
+     * @Param: CategoryEntity
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
+    @PostMapping("/category")
+    public String categoryAdd(CategoryEntity categoryEntity) {
+
+        categoryDAO.save(categoryEntity);
+        return "redirect:/category";
+    }
+
+    /**
+     * @Description: 删除  restful风格
+     * @Param: CategoryEntity
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
+    @DeleteMapping("/category/{id}")
+    public String categoryDelete(CategoryEntity categoryEntity) {
+
+        categoryDAO.delete(categoryEntity);
+        return "redirect:/category";
+    }
+
+    /**
+     * @Description: 修改前查询  restful风格
+     * @Param: int, Model
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
+    @GetMapping("/category/{id}")
+    public String categoryEdit(@PathVariable("id") int id, Model model) {
+
+        CategoryEntity categoryEntity = categoryDAO.getOne(id);
+        model.addAttribute("category", categoryEntity);
+        return "categoryEdit";
+    }
+
+    /**
+     * @Description: 修改  restful风格
+     * @Param: CategoryEntity
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
+    @PutMapping("/category/{id}")
+    public String categoryUpdate(CategoryEntity categoryEntity) {
+
+        categoryDAO.save(categoryEntity);
+        return "redirect:/category";
+    }
+
+    /**
+     * @Description: 列表查询
+     * @Param: Model, int, int
+     * @return: String
+     * @Author: hejie
+     * @date: 2019/4/18
+     */
     @RequestMapping("/categoryList1")
     public String categoryList1(Model model, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "3") int size) {
 

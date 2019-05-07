@@ -1,24 +1,19 @@
 package com.hejie.springboot.pojo;
 
-import javax.persistence.*;
-
 /**
   * @program: springboot
-  * @description: category_test实体类
+  * @description: javabean
   * @author: hejie
-  * @create: 2019/4/18
+  * @create: 2019/5/6
   */
-@Entity
-@Table(name = "category_test")
-public class CategoryEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class Phone {
+
     private int id;
 
-    @Column(name = "name")
     private String name;
+
+    private int price;
 
     public int getId() {
         return id;
@@ -36,8 +31,16 @@ public class CategoryEntity {
         this.name = name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "Category [id = " + id + ", name = " + name + "]";
+        return "Category [id = " + id + ", name = " + name + ", price = " + price + "]";
     }
 }

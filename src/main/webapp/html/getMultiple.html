@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>用AJAX以JSON方式获取多个数据</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <link rel="icon" href="../static/ico/favicon.ico">
+</head>
+<body>
+<input type="button" value="通过ajax获取多个Phone对象" id="sender">
+<div id="messageDiv"></div>
+</body>
+<script>
+    $("#sender").click(function(){
+        var url ="../phoneJson";
+        $.ajax({
+            type:"get",
+            url: url,
+            dataType:"json",
+            contentType : "application/json;charset=UTF-8",
+            success: function(result){
+                var phones = result;
+                for (var i in phones) {
+                    var old = $("#messageDiv").html();
+                    var phone = phones[i];
+                    var id = phone.id;
+                    var name = phone.name;
+                    var price = phone.price;
+                    $("#messageDiv").html(old + "<br> id:" + id + ", name:" + name + ", price:" + price);
+                }
+            }
+        });
+    });
+</script>
+</html>
