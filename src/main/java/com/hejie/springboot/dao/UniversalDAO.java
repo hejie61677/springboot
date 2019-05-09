@@ -1,6 +1,6 @@
 package com.hejie.springboot.dao;
 
-import com.hejie.springboot.pojo.CategoryEntity;
+import com.hejie.springboot.pojo.PhoneEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
   * @author: hejie
   * @create: 2019/5/6
   */
-public interface UniversalDAO extends JpaRepository<CategoryEntity, Integer> {
+public interface UniversalDAO extends JpaRepository<PhoneEntity, Integer> {
 }

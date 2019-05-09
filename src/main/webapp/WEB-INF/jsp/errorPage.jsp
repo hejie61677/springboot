@@ -23,7 +23,7 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        alert("aaaaaaaaa");
+        console.log("异常")
     });
 </script>
 </html>

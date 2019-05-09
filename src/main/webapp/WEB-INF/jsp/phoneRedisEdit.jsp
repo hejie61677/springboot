@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>PhoneEdit</title>
+    <title>Title</title>
     <link rel="icon" href="${pageContext.request.contextPath}/static/ico/favicon.ico">
 </head>
 <body>
 <div style="margin:auto; width:500px">
-    <form action="../phone/${phone.id}" method="post">
+    <form action="../phoneRedis/${phone.id}" method="post">
         <input type="hidden" name="_method" value="put">
         <label>
             name:<input type="text" name="name" value="${phone.name}" maxlength="16">

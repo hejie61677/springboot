@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>PhoneList</title>
+    <title>PhoneList_Redis</title>
     <link rel="icon" href="${pageContext.request.contextPath}/static/ico/favicon.ico">
     <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
@@ -25,25 +25,25 @@
             <td align="center">edit</td>
             <td align="center">delete</td>
         </tr>
-        <c:forEach items="${pageInfo.list}" var="phone" varStatus="st">
+        <c:forEach items="${page.content}" var="phone" varStatus="st">
             <tr>
                 <td>${phone.id}</td>
                 <td>${phone.name}</td>
                 <td>${phone.price}</td>
-                <td><a href="phone/${phone.id}">edit</a></td>
-                <td><a class="delete" href="phone/${phone.id}">delete</a></td>
+                <td><a href="phoneRedis/${phone.id}">edit</a></td>
+                <td><a class="delete" href="phoneRedis/${phone.id}">delete</a></td>
             </tr>
         </c:forEach>
     </table>
     <br>
     <div>
-        <a href="?start=1">[first page]</a>
-        <a href="?start=${pageInfo.pageNum - 1 < 1 ? 1 : pageInfo.pageNum - 1}">[previous page]</a>
-        <a href="?start=${pageInfo.pageNum + 1 > pageInfo.pages ? pageInfo.pages : pageInfo.pageNum + 1}">[next page]</a>
-        <a href="?start=${pageInfo.pages}">[last page]</a>
+        <a href="?start=0">[first page]</a>
+        <a href="?start=${page.number - 1 < 0 ? 0 : page.number - 1}">[previous page]</a>
+        <a href="?start=${page.number + 2 > page.totalPages ? page.totalPages - 1 : page.number + 1}">[next page]</a>
+        <a href="?start=${page.totalPages - 1}">[last page]</a>
     </div>
     <br>
-    <form action="phone" method="post">
+    <form action="phoneRedis" method="post">
         <label>
             name:<input type="text" name="name" maxlength="16"/>
             price:<input type="number" name="price" maxlength="5"/>
